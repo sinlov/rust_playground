@@ -16,3 +16,14 @@ fn for_external_variables(n: &mut i32) {
     n = &mut 10;
   }
 }
+
+#[test]
+fn funtion_access_to_external_variables_2(){
+  let mut one = 1;
+  out_func(&mut one);
+  assert_eq!(one, 1);
+}
+
+fn out_func(n: &mut u32) {
+  n = 2;
+}
