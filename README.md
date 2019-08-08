@@ -1,4 +1,14 @@
-# this is my rust code playgound
+<!-- TOC -->
+
+- [this is rust code playgound](#this-is-rust-code-playgound)
+- [how to use](#how-to-use)
+  - [when build error ?](#when-build-error-)
+  - [how windows build this project?](#how-windows-build-this-project)
+  - [how to add new case group ?](#how-to-add-new-case-group-)
+
+<!-- /TOC -->
+
+# this is rust code playgound
 
 If you do not have Rust setup, please visit [rust-lang.org](https://www.rust-lang.org/) for operating specific instructions.
 In order to run the test case you need Rust installed. To check your installations simply type:
@@ -31,17 +41,25 @@ make cleanAll
 - After supplying an answer for the first test case.
 - entering `cargo run` again will continue you on your `src/grammar`path, with config file `src/grammar.txt`
 
-## when build error
+## when build error ?
 
 ```sh
 # use CLI to clean build
 make cleanAll
 ```
 
-## how to add new case group
+## how windows build this project?
+
+install rust with rustup-init.exe in https://www.rust-lang.org/tools/install open with Windows!
+
+```bash
+cargo run
+# if error use
+rd /s /Q .\target
+del .\src\path_to_grammar.rs
+```
+
+## how to add new case group ?
 
 add new case file at `src/grammar.txt` with name of `src/grammar` file
-
-
-
 
