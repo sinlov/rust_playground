@@ -32,7 +32,7 @@ cleanAll: cleanBuild
 	@echo "clean finish"
 
 checkCargo:
-	@echo "=> If check env cargo error please install at https://www.rust-lang.org/tools/install"
+	@echo "=> If check env [ cargo ] error please install at https://www.rust-lang.org/tools/install"
 	@cargo version
 
 run:	checkCargo

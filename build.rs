@@ -14,7 +14,7 @@ fn main() {
             }
         },
         Ok(f) => {
-            write!(&f, "grammar!(\"1_base_test\");\n").unwrap();
+            write!(&f, "grammar!(\"0_base_test\");\n").unwrap();
         },
     }
 }

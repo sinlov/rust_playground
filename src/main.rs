@@ -57,6 +57,11 @@ fn walk_the_path() -> bool {
     Command::new("cargo")
         .arg("test")
         .arg("-q")
+        // .arg("--verbose")
+        .arg("--color")
+        .arg("always")
+        .arg("--")
+        .arg("--nocapture") // https://stackoverflow.com/questions/25106554/why-doesnt-println-work-in-rust-unit-tests
         .status()
         .unwrap()
         .success()
