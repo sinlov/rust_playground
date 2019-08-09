@@ -30,14 +30,14 @@ can run this project version is
 # see help
 make help
 # run test
-make run
+make grammar
 
 # clean build
 make cleanAll
 # only support make run
 ```
 
-- `make run` will generate the `path_to_grammar.rs` file and populate it with the first test in the list.
+- `make grammar` and default env `TEST_FILTER=grammar` will generate the `path_to_grammar.rs` file and populate it with the first test in the list.
 - After supplying an answer for the first test case.
 - entering `cargo run` again will continue you on your `src/grammar`path, with config file `src/grammar.txt`
 
