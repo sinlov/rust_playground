@@ -32,9 +32,6 @@ include z-MakefileUtils/MakeCargo.mk
 ENV_MODULE_FOLDER ?= ${ENV_ROOT}
 ENV_MODULE_MANIFEST = ${ENV_ROOT}/package.json
 ENV_MODULE_CARGO_CONFIG = ${ENV_ROOT}/Cargo.toml
-ENV_GIT_COMMIT_ID=$(shell git rev-parse HEAD)
-ENV_GIT_COMMIT_ID_SHORT=$(shell git rev-parse --short HEAD)
-ENV_GIT_BRANCH_LAST_INFO=$(shell git rev-parse --abbrev-ref HEAD)
 
 env: envBasic
 	@echo "== project env info start =="
@@ -43,7 +40,6 @@ env: envBasic
 	@echo "ENV_CARGO_REGISTRY                       ${ENV_CARGO_REGISTRY}"
 	@echo "ENV_CARGO_PROXY_CONFIG                   ${ENV_CARGO_PROXY_CONFIG}"
 	@echo "ENV_CARGO_TARGET_PATH                    ${ENV_CARGO_TARGET_PATH}"
-	@echo ""
 	@echo ""
 	@echo "ENV_DIST_VERSION :                       ${ENV_DIST_VERSION}"
 	@echo "ENV_DIST_MARK :                          ${ENV_DIST_MARK}"
@@ -60,7 +56,6 @@ envGit:
 	@echo "ENV_GIT_COMMIT_ID :                       ${ENV_GIT_COMMIT_ID}"
 	@echo "ENV_GIT_COMMIT_ID_SHORT :                 ${ENV_GIT_COMMIT_ID_SHORT}"
 	@echo ""
-
 
 dep: depFetch
 
