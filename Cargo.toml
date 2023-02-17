@@ -1,6 +1,6 @@
 [package]
 name = "rust_playground"
-version = "0.1.0"
+version = "0.1.2"
 authors = ["sinlov <sinlovgmppt@gmail.com>"]
 edition = "2021"
 
