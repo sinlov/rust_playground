@@ -86,6 +86,13 @@ include z-MakefileUtils/MakeDocker.mk
 include z-MakefileUtils/MakeCargo.mk
 include z-MakefileUtils/MakeDistTools.mk
 
+ENV_MODULE_FOLDER ?= ${ENV_ROOT}
+ENV_MODULE_MANIFEST = ${ENV_ROOT}/package.json
+ENV_MODULE_CARGO_CONFIG = ${ENV_ROOT}/Cargo.toml
+ENV_GIT_COMMIT_ID=$(shell git rev-parse HEAD)
+ENV_GIT_COMMIT_ID_SHORT=$(shell git rev-parse --short HEAD)
+ENV_GIT_BRANCH_LAST_INFO=$(shell git rev-parse --abbrev-ref HEAD)
+
 env:
 	@echo ------- start show env ---------
 	@echo ""
@@ -164,6 +171,7 @@ tagVersionHelp:
 	@echo "-> please check to change version, now is ${ENV_DIST_VERSION}"
 	@echo "change check at ${ENV_ROOT}/Makefile:3"
 	@echo "change check at ${ENV_MODULE_MANIFEST}:3"
+	@echo "change check at ${ENV_MODULE_CARGO_CONFIG}:3"
 	@echo ""
 	@echo "please check all file above!"
 	@echo ""

@@ -1,0 +1,23 @@
+{
+  "name": "rust_playground",
+  "version": "0.1.2",
+  "description": "rust playground",
+  "directories": {
+    "doc": "doc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinlov/rust_playground.git"
+  },
+  "keywords": [
+    "rust",
+    "make",
+    "action"
+  ],
+  "author": "sinlov",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/sinlov/rust_playground/issues"
+  },
+  "homepage": "https://github.com/sinlov/rust_playground#readme"
+}
