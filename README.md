@@ -13,16 +13,19 @@
 If you do not have Rust setup, please visit [rust-lang.org](https://www.rust-lang.org/) for operating specific instructions.
 In order to run the test case you need Rust installed. To check your installations simply type:
 
+edition = "2021"
+
 ```
 $ rustc --version
 $ cargo --version
 ```
-Currently, a Rust version of 1.3.0 or higher
+Currently, a Rust version of 1.56.0 or higher
 
 can run this project version is
 
-- rustc 1.36.0
-- cargo 1.36.0
+
+- rustc 1.56+
+- cargo 1.56+
 
 # how to use
 
