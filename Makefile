@@ -130,17 +130,14 @@ style: dep
 
 check: dep
 
-grammar: dep
-	env TEST_FILTER=$(INFO_TEST_FILTER_GROUP) cargo run
+runGrammar: dep
+	env TEST_FILTER=grammar cargo run
+
+runTools: dep
+	env TEST_FILTER=tools cargo run
 
 run: dep
 	cargo run
-
-runDev: dep
-	env PORT=$(INFO_PORT_DEV) cargo run
-
-runTest: dep
-	env PORT=$(INFO_PORT_TEST) cargo run
 
 test: dep
 	cargo test
