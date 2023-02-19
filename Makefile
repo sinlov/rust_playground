@@ -25,9 +25,10 @@ ENV_CARGO_TARGET_PATH=${ENV_ROOT}/target
 ENV_INFO_CATCHE_MID_PATH= ${ENV_ROOT}/src/path_to_grammar.rs
 
 include z-MakefileUtils/MakeBasicEnv.mk
-include z-MakefileUtils/MakeDistTools.mk
-include z-MakefileUtils/MakeDocker.mk
+include z-MakefileUtils/MakeGitTagHelper.mk
 include z-MakefileUtils/MakeCargo.mk
+include z-MakefileUtils/MakeDocker.mk
+include z-MakefileUtils/MakeDistTools.mk
 
 ENV_MODULE_FOLDER ?= ${ENV_ROOT}
 ENV_MODULE_MANIFEST = ${ENV_ROOT}/package.json
@@ -57,7 +58,7 @@ envGit:
 	@echo "ENV_GIT_COMMIT_ID_SHORT :                 ${ENV_GIT_COMMIT_ID_SHORT}"
 	@echo ""
 
-dep: depFetch
+dep: depCheck
 
 up:	depUp
 
@@ -66,9 +67,16 @@ init: dep
 	@cargo --version
 	@echo "=> just init finish this project for rust"
 
-style: dep
+lints: depLints
 
-check: dep
+test: dep
+	@cargo test
+
+testClean: dep
+
+testCoverage: dep
+
+ci: lints test
 
 runGrammar: dep
 	env TEST_FILTER=grammar cargo run
@@ -78,9 +86,6 @@ runTools: dep
 
 run: dep
 	cargo run
-
-test: dep
-	cargo test
 
 build: dep
 	cargo build
@@ -98,25 +103,6 @@ cleanBuildTarget:
 
 cleanAll: cleanMidPath cleanBuildTarget
 	@echo "clean finish"
-
-utils:
-	node -v
-	npm -v
-	npm install -g commitizen cz-conventional-changelog conventional-changelog-cli
-
-tagVersionHelp:
-	@echo "-> please check to change version, now is ${ENV_DIST_VERSION}"
-	@echo "change check at ${ENV_ROOT}/Makefile:3"
-	@echo "change check at ${ENV_MODULE_MANIFEST}:3"
-	@echo "change check at ${ENV_MODULE_CARGO_CONFIG}:3"
-	@echo ""
-	@echo "please check all file above!"
-	@echo ""
-
-tagBefore: tagVersionHelp
-	conventional-changelog -i CHANGELOG.md -s  --skip-unstable
-	@echo ""
-	@echo "place check all file, then add git tag to push!"
 
 help:
 	@echo "unity makefile template"

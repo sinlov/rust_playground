@@ -18,10 +18,12 @@ fn main() {
     } else if test_case == "tools" {
         run_tools_group();
     } else {
-        println!("{}", format!("ERROR: env {} {} not support please check input!", "TEST_FILTER", test_case));
+        println!(
+            "ERROR: env TEST_FILTER {} not support please check input!",
+            test_case
+        );
     }
 }
-
 
 #[cfg(not(test))]
 fn seek_the_target_path(name: &str) -> bool {
@@ -35,7 +37,7 @@ fn seek_the_target_path(name: &str) -> bool {
 
     if let Some(Ok(next_target)) = target.nth(passed_count) {
         println!("=> Next group is: {}.", next_target);
-        write!(&mut path, "{}!(\"{}\");\n", name, next_target).unwrap();
+        writeln!(&mut path, "{}!(\"{}\");", name, next_target).unwrap();
         true
     } else {
         println!("There will be no more tasks.");
@@ -60,9 +62,9 @@ fn walk_the_target_path() -> bool {
 
 #[allow(unused_macros)]
 macro_rules! grammar {
-    ($name:expr) => (
+    ($name:expr) => {
         include!(concat!("grammar/", $name, ".rs"));
-    );
+    };
 }
 
 #[cfg(not(test))]
@@ -84,9 +86,9 @@ mod path_to_grammar;
 
 #[allow(unused_macros)]
 macro_rules! tools {
-    ($name:expr) => (
+    ($name:expr) => {
         include!(concat!("tools/", $name, ".rs"));
-    );
+    };
 }
 
 #[cfg(not(test))]
