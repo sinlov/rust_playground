@@ -1,3 +1,5 @@
+[![rust-ci](https://github.com/sinlov/rust_playground/actions/workflows/rust-ci.yml/badge.svg?branch=main)](https://github.com/sinlov/rust_playground/actions/workflows/rust-ci.yml)
+
 <!-- TOC -->
 
 - [this is rust code playgound](#this-is-rust-code-playgound)
@@ -8,7 +10,7 @@
 
 <!-- /TOC -->
 
-# this is rust code playgound
+# this is rust code playground
 
 If you do not have Rust setup, please visit [rust-lang.org](https://www.rust-lang.org/) for operating specific instructions.
 In order to run the test case you need Rust installed. To check your installations simply type:
