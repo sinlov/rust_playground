@@ -1,0 +1,32 @@
+{
+  "name": "rust-cli-basic",
+  "version": "0.1.2",
+  "displayName": "rust-cli-basic",
+  "description": "template of rust cli basic",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinlov/rust-cli-basic.git"
+  },
+  "keywords": [
+    "rust",
+    "make",
+    "docker",
+    "action"
+  ],
+  "author": {
+    "name": "sinlov",
+    "email": "sinlovgmppt@gmail.com",
+    "url": "https://github.com/sinlov/rust-cli-basic"
+  },
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/sinlov/rust-cli-basic/issues"
+  },
+  "homepage": "https://github.com/sinlov/rust-cli-basic#readme"
+}

@@ -1,2 +1,3 @@
 0_base_test
 json_serde_sample
+npm_config_define
