@@ -1,14 +1,5 @@
 [![rust-ci](https://github.com/sinlov/rust_playground/actions/workflows/rust-ci.yml/badge.svg?branch=main)](https://github.com/sinlov/rust_playground/actions/workflows/rust-ci.yml)
-
-<!-- TOC -->
-
-- [this is rust code playgound](#this-is-rust-code-playgound)
-- [how to use](#how-to-use)
-  - [when build error ?](#when-build-error-)
-  - [how windows build this project?](#how-windows-build-this-project)
-  - [how to add new case group ?](#how-to-add-new-case-group-)
-
-<!-- /TOC -->
+[![codecov](https://codecov.io/gh/sinlov/rust_playground/branch/main/graph/badge.svg)](https://codecov.io/gh/sinlov/rust_playground)
 
 # this is rust code playground
 

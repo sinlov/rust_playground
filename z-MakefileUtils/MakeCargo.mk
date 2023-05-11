@@ -1,7 +1,10 @@
 # this file must use same folder at MakeDistTools.mk
 
 depCheck:
-	@cargo check
+	@cargo check --all --bins --examples --tests
+
+depCheckRelease:
+	@cargo check --all --bins --examples --tests --release
 
 depFetch:
 	@cargo fetch
@@ -27,5 +30,5 @@ depLintFmt:
 depLintChecksPackageMistakes:
 	@cargo clippy -- -D warnings
 
-depLints: depLintFmt depLintChecksPackageMistakes
+depLints: depCheckRelease depLintFmt depLintChecksPackageMistakes
 	@echo "finish lint check"

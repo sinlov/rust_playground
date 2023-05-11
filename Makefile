@@ -72,11 +72,14 @@ lints: depLints
 test: dep
 	@cargo test
 
+testNocapture:
+	@cargo test --all --all-features --no-fail-fast -- --nocapture
+
 testClean: dep
 
 testCoverage: dep
 
-ci: lints test
+ci: lints testNocapture
 
 runGrammar: dep
 	env TEST_FILTER=grammar cargo run
