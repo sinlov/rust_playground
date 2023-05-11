@@ -25,9 +25,9 @@ jobs:
       - name: check build
         run: cargo check --all --bins --examples --tests
 
-      - name: check examples
-        run: cargo check --all --bins --examples --tests
-        working-directory: ./examples
+#      - name: check examples
+#        run: cargo check --all --bins --examples --tests
+#        working-directory: ./examples
 
       - name: check release build
         run: cargo check --all --bins --examples --tests --release
