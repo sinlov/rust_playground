@@ -34,26 +34,28 @@ can run this project version is
 ```sh
 # see help
 make help
-# run test
-make grammar
+# run test grammar
+make runGrammar
+
+# run test tools
+make runTools
 
 # clean build
 make cleanAll
-# only support make run
 ```
 
-- `make grammar` and default env `TEST_FILTER=grammar` will generate the `path_to_grammar.rs` file and populate it with the first test in the list.
+- `make runGrammar` and default env `TEST_FILTER=grammar` will generate the `path_to_grammar.rs` file and populate it with the first test in the list.
 - After supplying an answer for the first test case.
 - entering `cargo run` again will continue you on your `src/grammar`path, with config file `src/grammar.txt`
 
-## when build error ?
+### when build error ?
 
 ```sh
 # use CLI to clean build
 make cleanAll
 ```
 
-## how windows build this project?
+### how windows build this project?
 
 install rust with rustup-init.exe in https://www.rust-lang.org/tools/install open with Windows!
 
@@ -64,7 +66,11 @@ rd /s /Q .\target
 del .\src\path_to_grammar.rs
 ```
 
-## how to add new case group ?
+### how to add new case group grammar?
 
 add new case file at `src/grammar.txt` with name of `src/grammar` file
+
+### how to add new case group tools?
+
+add new case file at `src/tools.txt` with name of `src/tools` file
 

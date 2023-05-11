@@ -1,3 +1,6 @@
 0_base_test
 1_arithmetic
 2_boolean
+4_vec
+5_slice
+6_string

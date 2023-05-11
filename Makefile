@@ -127,4 +127,5 @@ help:
 	@echo "$$ make init                     ~> init this project"
 	@echo ""
 	@echo "$$ make run                      ~> run in dev mode"
-	@echo "$$ make runProd                  ~> run in prod mode"
+	@echo "$$ make runGrammar               ~> run only grammar"
+	@echo "$$ make runTools                 ~> run only tools"
