@@ -1,5 +1,5 @@
 [![rust-ci](https://github.com/sinlov/rust_playground/actions/workflows/rust-ci.yml/badge.svg?branch=main)](https://github.com/sinlov/rust_playground/actions/workflows/rust-ci.yml)
-[![codecov](https://codecov.io/gh/sinlov/rust_playground/branch/main/graph/badge.svg)](https://codecov.io/gh/sinlov/rust_playground)
+[![codecov](https://codecov.io/gh/sinlov/rust_playground/branch/main/graph/badge.svg)](https://app.codecov.io/gh/sinlov/rust_playground/tree/main)
 
 # this is rust code playground
 
