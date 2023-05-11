@@ -46,7 +46,7 @@ jobs:
 
     name: Coverage ${{ matrix.version }} - x86_64-unknown-linux-gnu
     runs-on: ubuntu-latest
-    needs: [hack]
+    needs: [test]
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@master
