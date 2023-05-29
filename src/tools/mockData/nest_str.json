@@ -1,0 +1,5 @@
+{
+  "foo": "info",
+  "bar": 1,
+  "content_str": "{\"RemotePort\":\"\",\"Subdomain\":\"sunny\",\"Hostname\":\"\",\"HttpAuth\":\"\",\"Proto\":{\"http\":\"192.168.2.192:80\",\"tcp\":\"192.168.2.192:80\"}}"
+}
