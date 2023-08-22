@@ -64,3 +64,27 @@ fn vec_method() {
     assert_eq!(foo.pop(), Some("carmen"));
     assert_eq!(foo.pop(), None);
 }
+
+#[test]
+fn vec_splice() {
+    let mut v = vec![0, 1, 2];
+    let new = [7, 8];
+    let iter: std::vec::Splice<_> = v.splice(1.., new);
+    assert_eq!(iter.collect::<Vec<_>>(), &[1, 2]);
+    assert_eq!(v, &[0, 7, 8]);
+}
+
+#[test]
+fn vec_drain() {
+    let mut v = vec![0, 1, 2];
+    let iter: std::vec::Drain<_> = v.drain(..);
+    assert_eq!(iter.collect::<Vec<_>>(), &[0, 1, 2]);
+    assert_eq!(v.len(), 0);
+}
+
+#[test]
+fn vec_into_iter() {
+    let v = vec![0, 1, 2];
+    let iter: std::vec::IntoIter<_> = v.into_iter();
+    assert_eq!(iter.collect::<Vec<_>>(), &[0, 1, 2]);
+}

@@ -13,21 +13,30 @@ use std::env::var;
 #[cfg(not(test))]
 fn main() {
     let test_case = var("TEST_FILTER").unwrap_or("grammar".to_string());
-    if test_case == "grammar" {
-        run_grammar_group();
-    } else if test_case == "tools" {
-        run_tools_group();
-    } else {
-        println!(
+    match test_case {
+        ref s if s == "grammar" => {
+            println!("=> Run {} group.", s);
+            run_item_group_by_name(s);
+        }
+        ref s if s == "tools" => {
+            println!("=> Run {} group.", s);
+            run_item_group_by_name(s);
+        }
+        ref s if s == "thread_exp" => {
+            println!("=> Run {} group.", s);
+            run_item_group_by_name(s);
+        }
+        _ => println!(
             "ERROR: env TEST_FILTER {} not support please check input!",
             test_case
-        );
+        ),
     }
 }
 
 #[cfg(not(test))]
 fn seek_the_target_path(name: &str) -> bool {
-    let mut target = BufReader::new(File::open(format!("src/{}.txt", name)).unwrap()).lines();
+    let mut target =
+        BufReader::new(File::open(format!("src/1_group_settings/{}.txt", name)).unwrap()).lines();
     let mut path = OpenOptions::new()
         .read(true)
         .append(true)
@@ -43,6 +52,20 @@ fn seek_the_target_path(name: &str) -> bool {
         println!("There will be no more tasks.");
         false
     }
+}
+
+#[cfg(not(test))]
+fn run_item_group_by_name(group_name: &str) {
+    let message = if walk_the_target_path() {
+        if seek_the_target_path(group_name) {
+            "Long road, only the bug(with you?)."
+        } else {
+            "Climb up the mountain and see the new sea!"
+        }
+    } else {
+        "Meditate on your approach and return. Mountains are merely mountains."
+    };
+    println!("{}", message);
 }
 
 #[cfg(not(test))]
@@ -67,20 +90,6 @@ macro_rules! grammar {
     };
 }
 
-#[cfg(not(test))]
-fn run_grammar_group() {
-    let message = if walk_the_target_path() {
-        if seek_the_target_path("grammar") {
-            "Long road, only the bug(with you?)."
-        } else {
-            "Climb up the mountain and see the new sea!"
-        }
-    } else {
-        "Meditate on your approach and return. Mountains are merely mountains."
-    };
-    println!("{}", message);
-}
-
 #[cfg(test)]
 mod path_to_grammar;
 
@@ -91,19 +100,15 @@ macro_rules! tools {
     };
 }
 
-#[cfg(not(test))]
-fn run_tools_group() {
-    let message = if walk_the_target_path() {
-        if seek_the_target_path("tools") {
-            "Long road, only the bug(with you?)."
-        } else {
-            "Climb up the mountain and see the new sea!"
-        }
-    } else {
-        "Meditate on your approach and return. Mountains are merely mountains."
+#[cfg(test)]
+mod path_to_tools;
+
+#[allow(unused_macros)]
+macro_rules! thread_exp {
+    ($name:expr) => {
+        include!(concat!("thread_exp/", $name, ".rs"));
     };
-    println!("{}", message);
 }
 
 #[cfg(test)]
-mod path_to_tools;
+mod path_to_thread_exp;

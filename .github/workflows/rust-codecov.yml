@@ -1,11 +1,11 @@
-name: ci-linux
+name: rust-codecov
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-  push:
-    branches:
-      - main
+  workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
+
+permissions:
+  contents: write
+  discussions: write
 
 jobs:
   test:

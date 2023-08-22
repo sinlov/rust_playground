@@ -87,6 +87,9 @@ runGrammar: dep
 runTools: dep
 	env TEST_FILTER=tools cargo run
 
+runThreadExp: dep
+	env TEST_FILTER=thread_exp cargo run
+
 run: dep
 	cargo run
 
