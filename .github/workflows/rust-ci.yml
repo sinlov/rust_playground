@@ -29,10 +29,14 @@ jobs:
     name: rust-ci
     strategy:
       matrix:
+        # You can add more, for any target you'd like!
         toolchain:
           - 'stable'
           # - 'nightly'
-        # You can add more, for any target you'd like!
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
         include:
           - build: linux-gnu
             os: ubuntu-latest
