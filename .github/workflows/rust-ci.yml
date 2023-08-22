@@ -54,7 +54,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v3
 
-      - name: Install Rust
+      - name: Install Rust - ${{ matrix.build }}
         uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
