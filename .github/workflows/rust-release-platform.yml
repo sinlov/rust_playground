@@ -3,7 +3,7 @@ name: rust-release-platform
 on:
   workflow_call: # https://docs.github.com/actions/using-workflows/reusing-workflows#using-inputs-and-secrets-in-a-reusable-workflow
     inputs:
-      verison_name:
+      version_name:
         description: 'most of this use tag name'
         default: ''
         required: false
@@ -76,7 +76,7 @@ jobs:
           # Replace with the name of your binary
           binary_name=${{ env.DIST_BINARY_NAME }}
 
-          dirname="$binary_name-${{ inputs.verison_name }}-${{ matrix.target }}"
+          dirname="$binary_name-${{ inputs.version_name }}-${{ matrix.target }}"
           mkdir "$dirname"
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             mv "target/${{ matrix.target }}/release/$binary_name.exe" "$dirname"
