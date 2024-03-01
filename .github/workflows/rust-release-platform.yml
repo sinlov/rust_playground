@@ -49,7 +49,7 @@ jobs:
             target: x86_64-pc-windows-gnu
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Rust - ${{ matrix.build }}
         uses: dtolnay/rust-toolchain@stable
@@ -105,10 +105,10 @@ jobs:
           echo " archive sha256sum at: ${{ env.ASSET }}.sha256"
 
       - name: upload-artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: ${{ inputs.upload_artifact_name != null }}
         with:
-          name: ${{ inputs.upload_artifact_name }}
+          name: ${{ inputs.upload_artifact_name }}-${{inputs.version_name}}-${{ matrix.go_os }}-${{ matrix.go_arch }}
           retention-days: 5
           if-no-files-found: error
           path: |
