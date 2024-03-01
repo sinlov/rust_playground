@@ -3,10 +3,10 @@
 ENV_DIST_VERSION=0.1.2
 ENV_DIST_MARK=
 
-ROOT_NAME=rust_playground
+ROOT_NAME =rust_playground
 
 # MakeDocker.mk settings start
-ROOT_OWNER=drone-demo
+ROOT_OWNER =drone-demo
 ROOT_PARENT_SWITCH_TAG=1.67.1-buster
 # for image local build
 INFO_TEST_BUILD_DOCKER_PARENT_IMAGE=rust
@@ -16,18 +16,20 @@ INFO_BUILD_DOCKER_FILE=Dockerfile
 INFO_TEST_BUILD_DOCKER_FILE=Dockerfile.s6
 # MakeDocker.mk settings end
 
-ENV_RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
-ENV_RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+ENV_RUSTUP_DIST_SERVER=https://rsproxy.cn
+ENV_RUSTUP_UPDATE_ROOT=https://rsproxy.cn/rustup
 ENV_RUSTUP_TOOLCHAINS=${ENV_HOME_PATH}/.rustup/toolchains/
 ENV_CARGO_REGISTRY=${ENV_HOME_PATH}/.cargo/registry
-ENV_CARGO_PROXY_CONFIG=${ENV_ROOT}/z-MakefileUtils/proxy-tuna.toml
+ENV_CARGO_PROXY_CONFIG=${ENV_ROOT}/z-MakefileUtils/proxy-rsproxy.toml
 ENV_CARGO_TARGET_PATH=${ENV_ROOT}/target
-ENV_INFO_CATCHE_MID_PATH= ${ENV_ROOT}/src/path_to_grammar.rs
+ENV_INFO_CACHE_MID_PATH= ${ENV_ROOT}/src/path_to_grammar.rs
 
 include z-MakefileUtils/MakeBasicEnv.mk
 include z-MakefileUtils/MakeGitTagHelper.mk
 include z-MakefileUtils/MakeCargo.mk
-include z-MakefileUtils/MakeDocker.mk
+include z-MakefileUtils/MakeCargoTarpaulin.mk
+include z-MakefileUtils/MakeCargoFlamegraph.mk
+#include z-MakefileUtils/MakeDocker.mk
 include z-MakefileUtils/MakeDistTools.mk
 
 ENV_MODULE_FOLDER ?= ${ENV_ROOT}
@@ -62,7 +64,7 @@ dep: depCheck
 
 up:	depUp
 
-init: dep
+init: env
 	@rustup show
 	@cargo --version
 	@echo "=> just init finish this project for rust"
@@ -79,19 +81,24 @@ testClean: dep
 
 testCoverage: dep
 
-ci: lints testNocapture
+ci: dep lints testNocapture
 
+runGrammar: export TEST_FILTER=grammar
 runGrammar: dep
-	env TEST_FILTER=grammar cargo run
+	cargo run
 
+runTools: export TEST_FILTER=tools
 runTools: dep
-	env TEST_FILTER=tools cargo run
+	cargo run
 
+runThreadExp: export TEST_FILTER=thread_exp
 runThreadExp: dep
-	env TEST_FILTER=thread_exp cargo run
+	cargo run
 
 run: dep
 	cargo run
+
+runAll: runGrammar runTools runThreadExp
 
 build: dep
 	cargo build
@@ -99,15 +106,17 @@ build: dep
 buildRelease: dep
 	cargo build --release
 
+cleanTest: cleanCargoLLVMCovData cleanOutTarpaulin
+
 cleanMidPath:
-	-@RM -r ${ENV_INFO_CATCHE_MID_PATH}
-	$(info has clean path: ${ENV_INFO_CATCHE_MID_PATH})
+	@$(RM) -r ${ENV_INFO_CACHE_MID_PATH}
+	$(info has clean path: ${ENV_INFO_CACHE_MID_PATH})
 
 cleanBuildTarget:
-	-@RM -r ${ENV_CARGO_TARGET_PATH}
+	@$(RM) -r ${ENV_CARGO_TARGET_PATH}
 	$(info has clean: ${ENV_CARGO_TARGET_PATH})
 
-cleanAll: cleanMidPath cleanBuildTarget
+cleanAll: cleanTest cleanMidPath cleanBuildTarget cleanFlamegraphOut cleanDistAll
 	@echo "clean finish"
 
 help:
@@ -130,8 +139,11 @@ help:
 	@echo "- first run you can use make init to check environment"
 	@echo "------    ------"
 	@echo ""
-	@echo "$$ make init                     ~> init this project"
+	@echo "$$ make init                     ~> init this project see basic env"
+	@echo "$$ make dep                      ~> install dependencies"
 	@echo ""
 	@echo "$$ make run                      ~> run in dev mode"
 	@echo "$$ make runGrammar               ~> run only grammar"
 	@echo "$$ make runTools                 ~> run only tools"
+	@echo "$$ make runThreadExp             ~> run only thread_exp"
+	@echo "$$ make runAll                   ~> run all"
