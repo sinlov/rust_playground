@@ -3,6 +3,17 @@
 build/
 dist/
 
+### IDE
+
+.continuerc.json
+
+xcuserdata/
+.idea/
+.vs/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
 ### rust mod
 
 vendor/
