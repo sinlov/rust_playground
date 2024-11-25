@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [convention-change-log](https://github.com/convention-change/convention-change-log) for commit guidelines.
 
+## [1.0.1](https://github.com/sinlov/rust_playground/compare/1.0.0...v1.0.1) (2024-11-25)
+
+### 👷‍ Build System
+
+* add unexpected_cfgs lint and improve build system ([cde345f6](https://github.com/sinlov/rust_playground/commit/cde345f6248715272a2eec58e40df3278947d4dd))
+
+* improve build system and add CI support ([268ba6e6](https://github.com/sinlov/rust_playground/commit/268ba6e6e0a3c2ea23c5cfd2006a5ed820955442))
+
 ## 1.0.0 (2024-11-25)
 
 ### ✨ Features
