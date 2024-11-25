@@ -36,6 +36,7 @@ ENV_MODULE_FOLDER ?= ${ENV_ROOT}
 ENV_MODULE_MANIFEST = ${ENV_ROOT}/package.json
 ENV_MODULE_CARGO_CONFIG = ${ENV_ROOT}/Cargo.toml
 
+.PHONY: env
 env: envBasic
 	@echo "== project env info start =="
 	@echo ""
@@ -53,74 +54,99 @@ ENV_GIT_COMMIT_ID=$(shell git rev-parse HEAD)
 ENV_GIT_COMMIT_ID_SHORT=$(shell git rev-parse --short HEAD)
 ENV_GIT_BRANCH_LAST_INFO=$(shell git rev-parse --abbrev-ref HEAD)
 
-envGit:
+.PHONY: env.git
+env.git:
 	@echo "build env"
 	@echo "ENV_GIT_BRANCH_LAST_INFO :                ${ENV_GIT_BRANCH_LAST_INFO}"
 	@echo "ENV_GIT_COMMIT_ID :                       ${ENV_GIT_COMMIT_ID}"
 	@echo "ENV_GIT_COMMIT_ID_SHORT :                 ${ENV_GIT_COMMIT_ID_SHORT}"
 	@echo ""
 
-dep: depCheck
+.PHONY: dep
+dep: dep.check
 
-up:	depUp
+.PHONY: up
+up:	dep.up
 
+.PHONY: init
 init: env
 	@rustup show
 	@cargo --version
 	@echo "=> just init finish this project for rust"
 
-lints: depLints
+.PHONY: lints
+lints: dep.lint
 
+.PHONY: test
 test: dep
 	@cargo test
 
-testNocapture:
+.PHONY: test.nocapture
+test.nocapture:
 	@cargo test --all --all-features --no-fail-fast -- --nocapture
 
-testClean: dep
+.PHONY: test.clean
+test.clean: dep
 
-testCoverage: dep
+.PHONY: test.coverage
+test.coverage: dep
 
-ci: dep lints testNocapture
+.PHONY: ci
+ci: dep lints test.nocapture
 
-runGrammar: export TEST_FILTER=grammar
-runGrammar: dep
+.PHONY: ci.coverage
+ci.coverage: ci cargo.tarpaulin.out.std
+
+.PHONY: run.grammar
+run.grammar: export TEST_FILTER=grammar
+run.grammar: dep
 	cargo run
 
-runTools: export TEST_FILTER=tools
-runTools: dep
+.PHONY: run.tools
+run.tools: export TEST_FILTER=tools
+run.tools: dep
 	cargo run
 
-runThreadExp: export TEST_FILTER=thread_exp
-runThreadExp: dep
+.PHONY: run.thread.exp
+run.thread.exp: export TEST_FILTER=thread_exp
+run.thread.exp: dep
 	cargo run
 
+.PHONY: run
 run: dep
 	cargo run
 
-runAll: runGrammar runTools runThreadExp
+.PHONY: run.all
+run.all: run.grammar run.tools run.thread.exp
 
+.PHONY: build
 build: dep
 	cargo build
 
-buildRelease: dep
+.PHONY: build.release
+build.release: dep
 	cargo build --release
 
-cleanTest: cleanCargoLLVMCovData cleanOutTarpaulin
+.PHONY: clean
+clean.test: clean.cargo.llvm.cov.data clean.out.tarpaulin
 
-cleanMidPath:
+.PHONY: clean.mid.path
+clean.mid.path:
 	@$(RM) -r ${ENV_INFO_CACHE_MID_PATH}
 	$(info has clean path: ${ENV_INFO_CACHE_MID_PATH})
 
-cleanBuildTarget:
+.PHONY: clean.build.target
+clean.build.target:
 	@$(RM) -r ${ENV_CARGO_TARGET_PATH}
 	$(info has clean: ${ENV_CARGO_TARGET_PATH})
 
-cleanAll: cleanTest cleanMidPath cleanBuildTarget cleanFlamegraphOut cleanDistAll
+.PHONY: clean.all
+clean.all: clean.test clean.mid.path clean.build.target clean.flame.graph.out cleanDistAll
 	@echo "clean finish"
 
-help:
-	@echo "unity makefile template"
+.PHONY: helpProjectRoot
+helpProjectRoot:
+	@echo "Help: Project root Makefile"
 	@echo " module folder   path: ${ENV_MODULE_FOLDER}"
 	@echo " module version    is: ${ENV_DIST_VERSION}"
 	@echo " module manifest path: ${ENV_MODULE_MANIFEST}"
@@ -139,11 +165,19 @@ help:
 	@echo "- first run you can use make init to check environment"
 	@echo "------    ------"
 	@echo ""
-	@echo "$$ make init                     ~> init this project see basic env"
-	@echo "$$ make dep                      ~> install dependencies"
+	@echo "$$ make init                       ~> init this project see basic env"
+	@echo "$$ make dep                        ~> install dependencies"
+	@echo "~> make ci                         ~> run CI tools tasks"
+	@echo "~> make ci.coverage                ~> run CI coverage"
 	@echo ""
-	@echo "$$ make run                      ~> run in dev mode"
-	@echo "$$ make runGrammar               ~> run only grammar"
-	@echo "$$ make runTools                 ~> run only tools"
-	@echo "$$ make runThreadExp             ~> run only thread_exp"
-	@echo "$$ make runAll                   ~> run all"
+	@echo "$$ make run                        ~> run in dev mode"
+	@echo "$$ make run.grammar                ~> run only grammar"
+	@echo "$$ make run.tools                  ~> run only tools"
+	@echo "$$ make run.thread.exp             ~> run only thread_exp"
+	@echo "$$ make run.all                    ~> run all"
+
+.PHONY: help
+help: helpProjectRoot
+	@echo "== show more help"
+	@echo ""
+	@echo "-- more info see Makefile include --"

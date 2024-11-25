@@ -3,38 +3,46 @@
 # usage:
 # include z-MakefileUtils/MakeCargoTarpaulin.mk
 
-cleanOutTarpaulin:
+.PHONY: clean.out.tarpaulin
+clean.out.tarpaulin:
 	-@$(RM) -f cobertura.xml
 	-@$(RM) -f tarpaulin-report.json
 	-@$(RM) -f tarpaulin-report.html
 	-@$(RM) -f lcov.info
 
-cargoTarpaulinInstall:
+.PHONY: cargo.tarpaulin.install
+cargo.tarpaulin.install:
 	cargo install cargo-tarpaulin
 
-cargoTarpaulinOutStd:
+.PHONY: cargo.tarpaulin.out.std
+cargo.tarpaulin.out.std:
 	cargo tarpaulin --all-features --out Stdout
 
-cargoTarpaulinOutXml:
+.PHONY: cargo.tarpaulin.out.xml
+cargo.tarpaulin.out.xml:
 	cargo tarpaulin --all-features --out Xml
 
-cargoTarpaulinOutJson:
+.PHONY: cargo.tarpaulin.out.json
+cargo.tarpaulin.out.json:
 	cargo tarpaulin --all-features --out Json
 
-cargoTarpaulinOutHtml:
+.PHONY: cargo.tarpaulin.out.html
+cargo.tarpaulin.out.html:
 	cargo tarpaulin --all-features --out Html
 
-cargoTarpaulinOutLcov:
+.PHONY: cargo.tarpaulin.out.lcov
+cargo.tarpaulin.out.lcov:
 	cargo tarpaulin --all-features --out Lcov
 
-helpCargoTarpaulin:
-	@echo "this tools use https://crates.io/crates/cargo-tarpaulin"
+.PHONY: help.cargo.tarpaulin
+help.cargo.tarpaulin:
+	@echo "this tools use https://github.com/xd009642/tarpaulin"
 	@echo " must install as: cargo install cargo-tarpaulin"
-	@echo "$$ make cargoTarpaulinInstall               ~> install"
-	@echo "$$ make cleanOutTarpaulin                   ~> clean all out by tarpaulin"
-	@echo "$$ make cargoTarpaulinOutStd                ~> out Stdout"
-	@echo "$$ make cargoTarpaulinOutXml                ~> out Xml cobertura.xml"
-	@echo "$$ make cargoTarpaulinOutJson               ~> out json tarpaulin-report.json"
-	@echo "$$ make cargoTarpaulinOutHtml               ~> out Html tarpaulin-report.html"
-	@echo "$$ make cargoTarpaulinOutLcov               ~> out Lcov lcov.info"
+	@echo "$$ make cargo.tarpaulin.install                ~> install tarpaulin"
+	@echo "$$ make clean.out.tarpaulin                    ~> clean all out by tarpaulin"
+	@echo "$$ make cargo.tarpaulin.out.std                ~> out Stdout"
+	@echo "$$ make cargo.tarpaulin.out.xml                ~> out Xml cobertura.xml"
+	@echo "$$ make cargo.tarpaulin.out.json               ~> out json tarpaulin-report.json"
+	@echo "$$ make cargo.tarpaulin.out.html               ~> out Html tarpaulin-report.html"
+	@echo "$$ make cargo.tarpaulin.out.lcov               ~> out Lcov lcov.info"
 	@echo ""

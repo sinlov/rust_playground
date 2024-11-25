@@ -18,6 +18,7 @@ ENV_INFO_PLATFORM_OS_ARCH_PPC64=ppc64
 ENV_INFO_PLATFORM_OS_ARCH_PPC64LE=ppc64le
 ENV_INFO_PLATFORM_OS_ARCH_LOONG64=loong64
 
+.PHONY: pathDistEnv
 pathDistEnv:
 	@echo "-----------------  this pathDistEnv has start -----------------"
 ifeq ($(OS),Windows_NT)

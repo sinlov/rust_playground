@@ -45,16 +45,16 @@ can run this project version is
 # see help
 make help
 # run test grammar
-make runGrammar
+make run.grammar
 
 # run test tools
-make runTools
+make run.tools
 
 # clean build
-make cleanAll
+make clean.all
 ```
 
-- `make runGrammar` and default env `TEST_FILTER=grammar` will generate the `path_to_grammar.rs` file and populate it with the first test in the list.
+- `make run.grammar` and default env `TEST_FILTER=grammar` will generate the `path_to_grammar.rs` file and populate it with the first test in the list.
 - After supplying an answer for the first test case.
 - entering `cargo run` again will continue you on your `src/grammar`path, with config file `src/grammar.txt`
 
@@ -62,7 +62,7 @@ make cleanAll
 
 ```sh
 # use CLI to clean build
-make cleanAll
+make clean.all
 ```
 
 ### how windows build this project?

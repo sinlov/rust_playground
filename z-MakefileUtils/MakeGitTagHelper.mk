@@ -8,11 +8,13 @@
 
 ENV_MODULE_MANIFEST = ${ENV_ROOT}/package.json
 
+.PHONY: tagUtils
 tagUtils:
 	node -v
 	npm -v
 	npm install -g commitizen cz-conventional-changelog conventional-changelog-cli
 
+.PHONY: tagVersionHelp
 tagVersionHelp:
 	@echo "-> please check to change version, now is ${ENV_DIST_VERSION}"
 	@echo "change check at ${ENV_ROOT}/Makefile:3"
@@ -21,11 +23,13 @@ tagVersionHelp:
 	@echo "please check all file above!"
 	@echo ""
 
+.PHONY: tagBefore
 tagBefore: tagVersionHelp
 	conventional-changelog -i CHANGELOG.md -s  --skip-unstable
 	@echo ""
 	@echo "place check all file, then add git tag to push!"
 
+.PHONY: helpGitTag
 helpGitTag:
 	@echo "  first need init utils"
 	@echo "$$ make tagUtils            ~> npm install git cz"
