@@ -147,6 +147,9 @@ clean.build.target:
 clean.all: clean.test clean.mid.path clean.build.target clean.flame.graph.out cleanDistAll
 	@echo "clean finish"
 
+.PHONY: all
+all: dep ci ci.coverage clean
+
 .PHONY: helpProjectRoot
 helpProjectRoot:
 	@echo "Help: Project root Makefile"
@@ -172,6 +175,8 @@ helpProjectRoot:
 	@echo "$$ make dep                        ~> install dependencies"
 	@echo "~> make ci                         ~> run CI tools tasks"
 	@echo "~> make ci.coverage                ~> run CI coverage"
+	@echo ""
+	@echo "~> make all                        ~> run commonly used
 	@echo ""
 	@echo "$$ make run                        ~> run in dev mode"
 	@echo "$$ make run.grammar                ~> run only grammar"
