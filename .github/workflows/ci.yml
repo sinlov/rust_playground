@@ -63,7 +63,7 @@ jobs:
     needs:
       - version
       - rust-ci
-    if: ${{ github.base_ref == 'main' }}
+    if: ${{ ( github.event_name == 'push' && github.ref == 'refs/heads/main' ) || github.base_ref == 'main' }}
     uses: ./.github/workflows/rust-codecov.yml
     secrets: inherit
 
