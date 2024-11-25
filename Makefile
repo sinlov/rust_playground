@@ -91,6 +91,9 @@ test.clean: dep
 .PHONY: test.coverage
 test.coverage: dep
 
+.PHONY: style
+style: dep.lint
+
 .PHONY: ci
 ci: dep lints test.nocapture
 

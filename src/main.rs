@@ -10,6 +10,7 @@ use std::io::{BufRead, BufReader, Write};
 #[cfg(not(test))]
 use std::env::var;
 
+#[cfg(not(tarpaulin_include))]
 #[cfg(not(test))]
 fn main() {
     let test_case = var("TEST_FILTER").unwrap_or("grammar".to_string());
