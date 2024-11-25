@@ -30,6 +30,7 @@ jobs:
         # You can add more, for any target you'd like!
         toolchain:
           - 'stable'
+          # - '1.82.0'
           # - 'nightly'
         os:
           - ubuntu-latest
@@ -46,7 +47,7 @@ jobs:
 
           - build: windows-gnu
             os: windows-latest
-            target: x86_64-pc-windows-gnu
+            target: x86_64-pc-windows-msvc
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -65,9 +66,10 @@ jobs:
         run: cargo check --all --bins --examples --tests --release
 
       - name: Run release
-        uses: actions-rs/cargo@v1
+        uses: ClementTsang/cargo-action@v0.0.6
         with:
           use-cross: false
+          # cross-version: 0.2.4
           command: build
           args: --verbose --release --target ${{ matrix.target }}
 
@@ -108,7 +110,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ inputs.upload_artifact_name != null }}
         with:
-          name: ${{ inputs.upload_artifact_name }}-${{inputs.version_name}}-${{ matrix.go_os }}-${{ matrix.go_arch }}
+          name: ${{ inputs.upload_artifact_name }}-${{inputs.version_name}}-${{ matrix.os }}-${{ matrix.target }}
           retention-days: 5
           if-no-files-found: error
           path: |

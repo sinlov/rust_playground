@@ -1,5 +1,24 @@
+
 [![ci](https://github.com/sinlov/rust_playground/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sinlov/rust_playground/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/sinlov/rust_playground/branch/main/graph/badge.svg)](https://app.codecov.io/gh/sinlov/rust_playground/tree/main)
+
+[![deps.rs dependency](https://deps.rs/repo/github/sinlov/rust_playground/status.svg)](https://deps.rs/repo/github/sinlov/rust_playground)
+
+[![GitHub license](https://img.shields.io/github/license/sinlov/rust_playground)](https://github.com/sinlov/rust_playground)
+[![GitHub latest SemVer tag)](https://img.shields.io/github/v/tag/sinlov/rust_playground)](https://github.com/sinlov/rust_playground/tags)
+[![GitHub release)](https://img.shields.io/github/v/release/sinlov/rust_playground)](https://github.com/sinlov/rust_playground/releases)
+
+## Contributing
+
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v1.4-ff69b4.svg)](.github/CONTRIBUTING_DOC/CODE_OF_CONDUCT.md)
+[![GitHub contributors](https://img.shields.io/github/contributors/sinlov/rust_playground)](https://github.com/sinlov/rust_playground/graphs/contributors)
+
+We welcome community contributions to this project.
+
+Please read [Contributor Guide](.github/CONTRIBUTING_DOC/CONTRIBUTING.md) for more information on how to get started.
+
+请阅读有关 [贡献者指南](.github/CONTRIBUTING_DOC/zh-CN/CONTRIBUTING.md) 以获取更多如何入门的信息
+
 
 # this is rust code playground
 
