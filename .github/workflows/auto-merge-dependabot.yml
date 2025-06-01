@@ -20,7 +20,6 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-
       - name: Add label for Dependabot PRs
         # Automatically merge the following dependency upgrades:
         # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#ignore
